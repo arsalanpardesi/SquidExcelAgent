@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Excel AI Agent</title>
+
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"/>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f3f2f1;
+        }
+
+        .agent-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e1dfdd;
+            flex-shrink: 0;
+        }
+
+        .header-logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .agent-response-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 12px;
+            margin: 16px 0;
+            background-color: #ffffff;
+            border: 1px solid #e1dfdd;
+            border-radius: 8px;
+            color: #333;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+        
+        .agent-response-container:empty::before {
+            content: "The agent's response will appear here...";
+            color: #8a8886;
+            font-style: italic;
+        }
+
+        .input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #323130;
+            font-size: 14px;
+        }
+
+        .form-group textarea,
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #c8c6c4;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.2s ease-in-out;
+        }
+        
+        .form-group textarea:focus,
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0078d4;
+        }
+        
+        .hint-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        #status {
+            font-style: italic;
+            color: #555;
+            font-size: 12px;
+            text-align: center;
+            padding-top: 8px;
+        }
+        
+        .ms-Button--primary {
+            background-color: #0078d4;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .ms-Button--primary:hover {
+            background-color: #005a9e;
+        }
+        
+        .ms-Button-label {
+            color: #ffffff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body class="ms-font-m ms-welcome">
+    <div class="agent-container">
+        <div class="header">
+            <!-- 
+              LOGO FOR TASKPANE:
+              The path "/assets/squid.png" is a root-relative path.
+            -->
+            <img src="/assets/squid.png" alt="Logo" class="header-logo">
+            <h1 class="ms-fontSize-xl ms-fontWeight-semibold">Octalytiq - Squid AI</h1>
+        </div>
+
+        <div id="agentResponse" class="agent-response-container"></div>
+        
+        <div class="input-area">
+            <div class="form-group">
+                <textarea id="goal" rows="3" placeholder="Enter your command..."></textarea>
+            </div>
+            <div class="hint-row">
+                <div class="form-group">
+                    <label for="sheetHint">Sheet Hint (Optional):</label>
+                    <input id="sheetHint" type="text" placeholder="e.g., P&L" />
+                </div>
+                <div class="form-group">
+                    <label for="rowHint">At Row (Optional):</label>
+                    <input id="rowHint" type="number" min="1" placeholder="e.g., 25" />
+                </div>
+            </div>            
+            <div class="form-group">
+                <label for="modelSelector">AI Model:</label>
+                <select id="modelSelector">
+                    <option value="gemini">Gemini Pro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pdfFile">Attach PDF (Optional):</label>
+                <input id="pdfFile" type="file" accept=".pdf" class="ms-TextField-field">
+            </div>
+            <button id="runAgent" class="ms-Button ms-Button--primary">
+                <span class="ms-Button-label">Run Agent</span>
+            </button>
+            <div id="status"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+

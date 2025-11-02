@@ -1,0 +1,75 @@
+{
+  "name": "office-addin-taskpane",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OfficeDev/Office-Addin-TaskPane.git"
+  },
+  "license": "Proprietary",
+  "config": {
+    "app_to_debug": "excel",
+    "app_type_to_debug": "desktop",
+    "dev_server_port": 3000,
+    "productionUrl": "https://Octalytiq.ai"
+  },
+  "scripts": {
+    "build": "npm run manifest:prod && webpack --mode production",
+    "build:dev": "npm run manifest:dev && webpack --mode development",
+    "dev-server": "webpack serve --mode development",
+    "lint": "office-addin-lint check",
+    "lint:fix": "office-addin-lint fix",
+    "prettier": "office-addin-lint prettier",
+    "signin": "office-addin-dev-settings m365-account login",
+    "signout": "office-addin-dev-settings m365-account logout",
+    "start": "npm run manifest:dev && office-addin-debugging start manifest.xml --dev-server \"npm run dev-server\"",
+    "stop": "office-addin-debugging stop manifest.xml",
+    "validate": "office-addin-manifest validate manifest.xml",
+    "watch": "webpack --mode development --watch",
+    "manifest:dev": "replace-in-file --configFile=replace.config.js",
+    "manifest:prod": "replace-in-file --configFile=replace.config.js --isRegex=true \"~remoteAppUrl~\" \"%npm_package_config_productionUrl%\"",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.77",
+    "@langchain/google-genai": "^0.2.18",
+    "@langchain/langgraph": "^0.4.9",
+    "core-js": "^3.36.0",
+    "regenerator-runtime": "^0.14.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-typescript": "^7.23.3",
+    "@types/jest": "^30.0.0",
+    "@types/office-js": "^1.0.377",
+    "@types/office-runtime": "^1.0.35",
+    "babel-loader": "^9.1.3",
+    "copy-webpack-plugin": "^12.0.2",
+    "eslint-plugin-office-addins": "^4.0.3",
+    "file-loader": "^6.2.0",
+    "html-loader": "^5.0.0",
+    "html-webpack-plugin": "^5.6.0",
+    "jest": "^30.1.3",
+    "office-addin-cli": "^2.0.3",
+    "office-addin-debugging": "^6.0.3",
+    "office-addin-dev-certs": "^2.0.3",
+    "office-addin-lint": "^3.0.3",
+    "office-addin-manifest": "^2.0.3",
+    "office-addin-prettier-config": "^2.0.1",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "replace-in-file": "^7.1.0",
+    "source-map-loader": "^5.0.0",
+    "ts-jest": "^29.4.4",
+    "typescript": "^5.4.2",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "5.1.0"
+  },
+  "prettier": "office-addin-prettier-config",
+  "browserslist": [
+    "last 2 versions",
+    "ie 11"
+  ]
+}

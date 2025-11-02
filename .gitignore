@@ -1,0 +1,29 @@
+# Dependencies
+/server/node_modules
+/node_modules
+
+# Build output
+/server/dist
+/dist
+/.webpack
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+/server/.env
+*.env
+.env
+
+# IDE and OS-specific files
+.DS_Store
+.vscode/
+.idea/
+Thumbs.db
+
+#office add-in certs
+.office-addin-dev-certs/
