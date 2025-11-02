@@ -4,7 +4,11 @@ This is an open-source, fully agentic AI copilot for Microsoft Excel. The curren
 
 This current version is comparable to other Excel copilot agents available commercially, but this is for free other than the Gemini API credits 😄.
 
+## Demo 1
+
 [![Watch the Demo 1](https://img.youtube.com/vi/m04iPe7FuBU/hqdefault.jpg)](https://www.youtube.com/watch?v=m04iPe7FuBU)
+
+## Demo 2
 
 [![Watch the Demo 2](https://img.youtube.com/vi/2ajH7caXuDc/hqdefault.jpg)](https://www.youtube.com/watch?v=2ajH7caXuDc)
 
